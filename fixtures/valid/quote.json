@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "x-review-payload/v1",
+  "reviewId": "x-primary-20260723-valid-quote",
+  "generatedAt": "2026-07-23T09:20:00+08:00",
+  "timezone": "Asia/Hong_Kong",
+  "account": {
+    "platform": "x",
+    "accountId": "primary"
+  },
+  "operator": {
+    "name": "pulse-x",
+    "repo": "sharebravery/pulse-x",
+    "commit": "cccccccccccccccccccccccccccccccccccccccc"
+  },
+  "event": {
+    "eventTitle": "Infrastructure pricing change",
+    "publishJudgment": "The new pricing changes the cost assumptions for developers and is suitable for a quote post.",
+    "repeatReason": "首次覆盖",
+    "primaryDomain": "Technology business"
+  },
+  "sources": [
+    {
+      "sourceId": "pricing-page",
+      "title": "Official pricing announcement",
+      "url": "https://example.com/pricing",
+      "publishedAt": "2026-07-23T01:00:00Z",
+      "kind": "official"
+    }
+  ],
+  "images": [],
+  "candidates": [
+    {
+      "candidateId": "quote-1",
+      "kind": "quote",
+      "label": "Cost consequence",
+      "angle": "developer economics",
+      "reason": "Connects the announcement to the practical cost of operating the product.",
+      "language": "en",
+      "sourceIds": ["pricing-page"],
+      "imageIds": [],
+      "text": "The headline is the lower unit price. The real question is whether total usage grows faster than the savings, leaving teams with a larger bill anyway.",
+      "target": {
+        "url": "https://x.com/example/status/2234567890",
+        "author": "@example",
+        "publishedAt": "2026-07-23T01:00:00Z"
+      }
+    }
+  ]
+}
