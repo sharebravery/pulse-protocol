@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "x-review-payload/v1",
+  "reviewId": "x-primary-20260723-non-https",
+  "generatedAt": "2026-07-23T10:10:00+08:00",
+  "timezone": "Asia/Hong_Kong",
+  "account": {
+    "platform": "x",
+    "accountId": "primary"
+  },
+  "operator": {
+    "name": "pulse-x",
+    "repo": "sharebravery/pulse-x",
+    "commit": "2222222222222222222222222222222222222222"
+  },
+  "event": {
+    "eventTitle": "Non-HTTPS source fixture",
+    "publishJudgment": "This fixture must fail URL validation.",
+    "repeatReason": "首次覆盖",
+    "primaryDomain": "AI"
+  },
+  "sources": [
+    {
+      "sourceId": "official",
+      "title": "Insecure source URL",
+      "url": "http://example.com/announcement"
+    }
+  ],
+  "images": [],
+  "candidates": [
+    {
+      "candidateId": "post-1",
+      "kind": "post",
+      "label": "Invalid URL",
+      "angle": "validation",
+      "reason": "The source URL does not use HTTPS.",
+      "language": "en",
+      "sourceIds": ["official"],
+      "imageIds": [],
+      "text": "This candidate must fail because its supporting source is not HTTPS."
+    }
+  ]
+}
