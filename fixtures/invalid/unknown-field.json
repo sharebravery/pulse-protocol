@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "x-review-payload/v1",
+  "reviewId": "x-primary-20260723-unknown-field",
+  "generatedAt": "2026-07-23T10:00:00+08:00",
+  "timezone": "Asia/Hong_Kong",
+  "account": {
+    "platform": "x",
+    "accountId": "primary"
+  },
+  "operator": {
+    "name": "pulse-x",
+    "repo": "sharebravery/pulse-x",
+    "commit": "1111111111111111111111111111111111111111"
+  },
+  "event": {
+    "eventTitle": "Unknown field fixture",
+    "publishJudgment": "This fixture must fail strict object validation.",
+    "repeatReason": "首次覆盖",
+    "primaryDomain": "AI"
+  },
+  "sources": [
+    {
+      "sourceId": "official",
+      "title": "Official announcement",
+      "url": "https://example.com/announcement"
+    }
+  ],
+  "images": [],
+  "candidates": [
+    {
+      "candidateId": "post-1",
+      "kind": "post",
+      "label": "Unknown field",
+      "angle": "validation",
+      "reason": "The candidate includes a field not defined by the contract.",
+      "language": "en",
+      "sourceIds": ["official"],
+      "imageIds": [],
+      "text": "This candidate must fail because extra fields are forbidden.",
+      "hashtags": ["ai"]
+    }
+  ]
+}
