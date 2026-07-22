@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "x-review-payload/v1",
+  "reviewId": "x-primary-20260723-valid-reply",
+  "generatedAt": "2026-07-23T09:10:00+08:00",
+  "timezone": "Asia/Hong_Kong",
+  "account": {
+    "platform": "x",
+    "accountId": "primary"
+  },
+  "operator": {
+    "name": "pulse-x",
+    "repo": "sharebravery/pulse-x",
+    "commit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "event": {
+    "eventTitle": "Developer tooling update",
+    "publishJudgment": "The update changes a common development workflow and supports a useful direct response.",
+    "repeatReason": "首次覆盖",
+    "primaryDomain": "AI, software and tools"
+  },
+  "sources": [
+    {
+      "sourceId": "official-post",
+      "title": "Official product post",
+      "url": "https://example.com/product-post",
+      "publishedAt": "2026-07-23T00:45:00Z",
+      "kind": "official"
+    }
+  ],
+  "images": [],
+  "candidates": [
+    {
+      "candidateId": "reply-1",
+      "kind": "reply",
+      "label": "Practical clarification",
+      "angle": "workflow boundary",
+      "reason": "Adds a concrete limitation that is missing from the original post.",
+      "language": "en",
+      "sourceIds": ["official-post"],
+      "imageIds": [],
+      "text": "The useful part is the workflow change, but the boundary matters: teams still need to verify generated changes before shipping them.",
+      "target": {
+        "url": "https://x.com/example/status/1234567890",
+        "author": "@example",
+        "publishedAt": "2026-07-23T00:45:00Z"
+      }
+    }
+  ]
+}
