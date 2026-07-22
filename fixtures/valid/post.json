@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "x-review-payload/v1",
+  "reviewId": "x-primary-20260723-example-post",
+  "generatedAt": "2026-07-23T09:00:00+08:00",
+  "timezone": "Asia/Hong_Kong",
+  "account": {
+    "platform": "x",
+    "accountId": "primary",
+    "handle": "sharebravery"
+  },
+  "operator": {
+    "name": "pulse-x",
+    "repo": "sharebravery/pulse-x",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "event": {
+    "eventTitle": "Example product launch",
+    "publishJudgment": "The release materially changes a common developer workflow.",
+    "repeatReason": "首次覆盖",
+    "primaryDomain": "AI, software and tools"
+  },
+  "sources": [
+    {
+      "sourceId": "official",
+      "title": "Official announcement",
+      "url": "https://example.com/announcement",
+      "publishedAt": "2026-07-23T00:30:00Z",
+      "kind": "official"
+    }
+  ],
+  "images": [],
+  "candidates": [
+    {
+      "candidateId": "c1",
+      "kind": "post",
+      "label": "Direct take",
+      "angle": "developer impact",
+      "reason": "Clear user-facing consequence.",
+      "language": "en",
+      "sourceIds": ["official"],
+      "imageIds": [],
+      "text": "A concise example post grounded in the official announcement."
+    }
+  ]
+}
