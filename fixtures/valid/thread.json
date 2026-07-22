@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "x-review-payload/v1",
+  "reviewId": "x-primary-20260723-valid-thread",
+  "generatedAt": "2026-07-23T09:30:00+08:00",
+  "timezone": "Asia/Hong_Kong",
+  "account": {
+    "platform": "x",
+    "accountId": "primary"
+  },
+  "operator": {
+    "name": "pulse-x",
+    "repo": "sharebravery/pulse-x",
+    "commit": "dddddddddddddddddddddddddddddddddddddddd"
+  },
+  "event": {
+    "eventTitle": "New robotics deployment milestone",
+    "publishJudgment": "The deployment has enough operational detail to justify a short explanatory thread.",
+    "repeatReason": "首次覆盖",
+    "primaryDomain": "Robotics",
+    "relatedDomains": ["AI, software and tools"]
+  },
+  "sources": [
+    {
+      "sourceId": "deployment-note",
+      "title": "Official deployment note",
+      "url": "https://example.com/robotics-deployment",
+      "publishedAt": "2026-07-23T01:15:00Z",
+      "kind": "official"
+    }
+  ],
+  "images": [
+    {
+      "imageId": "deployment-photo",
+      "url": "https://example.com/assets/robot-deployment.jpg",
+      "sourcePageUrl": "https://example.com/robotics-deployment",
+      "alt": "A robot operating in a production facility.",
+      "caption": "The deployment environment described in the official note.",
+      "sourceName": "Example Robotics",
+      "usage": "primary"
+    }
+  ],
+  "candidates": [
+    {
+      "candidateId": "thread-1",
+      "kind": "thread",
+      "label": "Deployment breakdown",
+      "angle": "operational reality",
+      "reason": "The event requires separate posts for the deployment, the constraint, and the broader implication.",
+      "language": "en",
+      "sourceIds": ["deployment-note"],
+      "imageIds": ["deployment-photo"],
+      "posts": [
+        "A robotics milestone matters more when it moves from a demo to a repeatable operating process. This deployment finally gives us details to judge.",
+        "The constraint is still human supervision and integration with existing systems. Hardware progress alone does not remove the operational work.",
+        "The next signal to watch is not another video. It is repeat deployment at a second customer with similar uptime and staffing requirements."
+      ]
+    }
+  ]
+}
