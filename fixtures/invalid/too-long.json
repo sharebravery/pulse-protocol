@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "x-review-payload/v1",
+  "reviewId": "x-primary-20260723-too-long",
+  "generatedAt": "2026-07-23T09:00:00+08:00",
+  "timezone": "Asia/Hong_Kong",
+  "account": {
+    "platform": "x",
+    "accountId": "primary"
+  },
+  "operator": {
+    "name": "pulse-x",
+    "repo": "sharebravery/pulse-x",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "event": {
+    "eventTitle": "Invalid example",
+    "publishJudgment": "This fixture must fail.",
+    "repeatReason": "首次覆盖",
+    "primaryDomain": "AI"
+  },
+  "sources": [
+    {
+      "sourceId": "official",
+      "title": "Official announcement",
+      "url": "https://example.com/announcement"
+    }
+  ],
+  "images": [],
+  "candidates": [
+    {
+      "candidateId": "c1",
+      "kind": "post",
+      "label": "Invalid",
+      "angle": "length",
+      "reason": "The text is longer than 280 characters.",
+      "language": "en",
+      "sourceIds": ["official"],
+      "imageIds": [],
+      "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+  ]
+}
