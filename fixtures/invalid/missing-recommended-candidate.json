@@ -1,22 +1,21 @@
 {
-  "schemaVersion": "x-review-payload/v1",
-  "reviewId": "x-primary-20260723-missing-recommendation",
+  "schemaVersion": "x-content/v1",
+  "contentId": "x-primary-20260723-missing-recommendation",
   "generatedAt": "2026-07-23T09:00:00+08:00",
-  "timezone": "Asia/Hong_Kong",
+  "displayTitle": "Example product launch",
   "account": {
     "platform": "x",
     "accountId": "primary"
   },
   "operator": {
     "name": "pulse-x",
-    "repo": "sharebravery/pulse-x",
-    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    "repository": "sharebravery/pulse-x",
+    "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   },
   "event": {
-    "eventTitle": "Example product launch",
-    "publishJudgment": "The release materially changes a common developer workflow.",
-    "repeatReason": "首次覆盖",
-    "primaryDomain": "AI, software and tools"
+    "title": "Example product launch",
+    "whyItMatters": "The release materially changes a common developer workflow.",
+    "domains": ["AI and software"]
   },
   "sources": [
     {
@@ -31,12 +30,21 @@
       "candidateId": "c1",
       "kind": "post",
       "label": "Direct take",
-      "angle": "developer impact",
-      "reason": "Clear user-facing consequence.",
-      "language": "en",
+      "angle": "Developer impact",
+      "translation": "一条基于官方公告、突出开发者影响的简洁示例帖子。",
       "sourceIds": ["official"],
       "imageIds": [],
       "text": "A concise example post grounded in the official announcement."
+    },
+    {
+      "candidateId": "c2",
+      "kind": "post",
+      "label": "Operational limit",
+      "angle": "Deployment boundary",
+      "translation": "另一条强调部署边界的示例帖子。",
+      "sourceIds": ["official"],
+      "imageIds": [],
+      "text": "A second example post that focuses on the deployment boundary."
     }
   ],
   "recommendation": {

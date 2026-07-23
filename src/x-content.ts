@@ -1,9 +1,9 @@
 import * as z from "zod";
 
-const REVIEW_ID_PATTERN = /^[a-z0-9][a-z0-9-]{7,127}$/;
+const CONTENT_ID_PATTERN = /^[a-z0-9][a-z0-9-]{7,127}$/;
 const ACCOUNT_ID_PATTERN = /^[a-z0-9][a-z0-9-]{1,63}$/;
 const REPOSITORY_PATTERN = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
-const COMMIT_PATTERN = /^[0-9a-fA-F]{40}$/;
+const COMMIT_SHA_PATTERN = /^[0-9a-fA-F]{40}$/;
 const LOCAL_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$/;
 
 const httpsUrlSchema = z
@@ -17,7 +17,7 @@ const dateTimeSchema = z.iso
 const localIdSchema = z
   .string()
   .regex(LOCAL_ID_PATTERN)
-  .describe("Stable identifier local to this payload. Use letters, digits, underscores, or hyphens.");
+  .describe("Stable identifier local to this content document. Use letters, digits, underscores, or hyphens.");
 
 const sourceIdsSchema = z
   .array(localIdSchema)
@@ -39,7 +39,7 @@ const xTextSchema = z
 
 export const AccountRefSchema = z
   .strictObject({
-    platform: z.literal("x").describe("Target platform for this payload."),
+    platform: z.literal("x").describe("Target platform for this content."),
     accountId: z
       .string()
       .regex(ACCOUNT_ID_PATTERN)
@@ -51,19 +51,19 @@ export const AccountRefSchema = z
       .optional()
       .describe("Optional current public X handle without changing the stable accountId."),
   })
-  .describe("X account receiving the review candidates.");
+  .describe("X account receiving the content options.");
 
 export const OperatorRefSchema = z
   .strictObject({
-    name: z.literal("pulse-x").describe("Operator that produced the payload."),
-    repo: z
+    name: z.literal("pulse-x").describe("Operator that produced the content."),
+    repository: z
       .string()
       .regex(REPOSITORY_PATTERN)
       .describe("GitHub repository in owner/name form containing the operator rules."),
-    commit: z
+    commitSha: z
       .string()
-      .regex(COMMIT_PATTERN)
-      .describe("Exact 40-character Git commit used to produce this payload."),
+      .regex(COMMIT_SHA_PATTERN)
+      .describe("Exact 40-character Git commit used to produce the content."),
   })
   .describe("Immutable provenance for the operator rules used during generation.");
 
@@ -74,11 +74,9 @@ export const SourceRefSchema = z
     url: httpsUrlSchema.describe("Canonical public HTTPS page supporting the stated facts."),
     publishedAt: dateTimeSchema.optional().describe("Source publication time when reliably available."),
     kind: z
-      .string()
-      .min(1)
-      .max(60)
+      .enum(["official", "filing", "regulator", "paper", "incident_report", "reporting", "other"])
       .optional()
-      .describe("Optional source category, such as official, filing, paper, regulator, or reporting."),
+      .describe("Optional normalized source category."),
   })
   .describe("A traceable source used to verify the event or candidate claims.");
 
@@ -108,30 +106,15 @@ const TargetSchema = z
   })
   .describe("Required target metadata for reply and quote candidates.");
 
-const ReviewTranslationSchema = z
-  .strictObject({
-    language: z.literal("zh-CN").describe("Language of the review-only translation."),
-    text: z
-      .string()
-      .min(1)
-      .max(8000)
-      .describe("Simplified Chinese translation for reviewer comprehension. Never publish it as X copy."),
-  })
-  .describe("Optional reviewer aid that does not change the publishable English candidate.");
-
 const candidateBaseShape = {
-  candidateId: localIdSchema.describe("Unique candidate identifier within this payload."),
+  candidateId: localIdSchema.describe("Unique candidate identifier within this content document."),
   label: z.string().min(1).max(80).describe("Short internal label distinguishing this candidate."),
   angle: z.string().min(1).max(120).describe("The candidate's distinct editorial angle."),
-  reason: z
+  translation: z
     .string()
     .min(1)
-    .max(500)
-    .describe("Why this form and angle are worth reviewing instead of being a wording variant."),
-  language: z.literal("en").describe("Phase 1 X candidates are written in English."),
-  reviewTranslation: ReviewTranslationSchema.optional().describe(
-    "Optional Simplified Chinese translation shown only in the review experience.",
-  ),
+    .max(8000)
+    .describe("Faithful Simplified Chinese translation of only the publishable English copy."),
   sourceIds: sourceIdsSchema,
   imageIds: imageIdsSchema,
 };
@@ -183,49 +166,39 @@ export const XCandidateSchema = z
   ])
   .describe("One complete X candidate: post, reply, quote, or thread.");
 
-const XReviewPayloadStructuralSchema = z
+const XContentStructuralSchema = z
   .strictObject({
     schemaVersion: z
-      .literal("x-review-payload/v1")
+      .literal("x-content/v1")
       .describe("Versioned contract identifier. Change only when the data contract becomes incompatible."),
-    reviewId: z
+    contentId: z
       .string()
-      .regex(REVIEW_ID_PATTERN)
-      .describe("Globally unique, stable review identifier. Use lowercase letters, digits, and hyphens."),
-    generatedAt: dateTimeSchema.describe("Time the complete payload was generated."),
-    timezone: z
-      .literal("Asia/Hong_Kong")
-      .describe("Business timezone used for scheduling, filenames, and review context."),
+      .regex(CONTENT_ID_PATTERN)
+      .describe("Globally unique, stable content identifier. Use lowercase letters, digits, and hyphens."),
+    generatedAt: dateTimeSchema.describe("Time the complete content document was generated."),
+    displayTitle: z
+      .string()
+      .min(1)
+      .max(100)
+      .describe("Concise title used in the Pulse X email subject and header."),
     account: AccountRefSchema,
     operator: OperatorRefSchema,
     event: z
       .strictObject({
-        reviewTitle: z
-          .string()
-          .min(1)
-          .max(100)
-          .optional()
-          .describe("Optional concise title for the review email subject and header."),
-        eventTitle: z.string().min(1).max(180).describe("Concise factual title for the underlying event."),
-        publishJudgment: z
+        title: z.string().min(1).max(180).describe("Concise factual title for the underlying event."),
+        whyItMatters: z
           .string()
           .min(1)
           .max(500)
-          .describe("Why the event is consequential and worth considering for publication."),
-        repeatReason: z
-          .string()
-          .min(1)
-          .max(300)
-          .describe("For first coverage, state that clearly; for follow-ups, identify the genuinely new development."),
-        primaryDomain: z.string().min(1).max(80).describe("Single primary editorial domain."),
-        relatedDomains: z
+          .describe("Why the event is consequential enough to publish."),
+        domains: z
           .array(z.string().min(1).max(80))
-          .max(2)
-          .refine((items) => new Set(items).size === items.length, "relatedDomains must be unique")
-          .optional()
-          .describe("Up to two distinct secondary domains when the event genuinely crosses categories."),
+          .min(1)
+          .max(3)
+          .refine((items) => new Set(items).size === items.length, "domains must be unique")
+          .describe("Ordered editorial domains, with the primary domain first."),
       })
-      .describe("Shared event judgment supporting every candidate in this payload."),
+      .describe("Shared event context supporting every candidate."),
     sources: z
       .array(SourceRefSchema)
       .min(1)
@@ -242,28 +215,28 @@ const XReviewPayloadStructuralSchema = z
       .describe("One to three materially different, fully formed X candidates. candidateId values must be unique."),
     recommendation: z
       .strictObject({
-        candidateId: localIdSchema.describe("Candidate recommended as the default review choice."),
+        candidateId: localIdSchema.describe("Candidate recommended as the default option."),
         reason: z
           .string()
           .min(1)
           .max(500)
-          .describe("Why this candidate is the strongest default choice for the reviewer."),
+          .describe("Why this candidate is the strongest default option."),
       })
       .optional()
-      .describe("Optional recommendation, especially useful when the payload contains multiple candidates."),
+      .describe("Required when multiple candidates are present and omitted when only one candidate exists."),
   })
   .meta({
-    title: "Pulse X Review Payload v1",
+    title: "Pulse X Content v1",
     description:
-      "Complete immutable input produced by the Pulse X operator and delivered to Pulse Relay. All candidate sourceIds and imageIds must resolve to top-level entries.",
+      "Complete immutable X content produced by Pulse X and delivered by Pulse Relay. All candidate sourceIds and imageIds must resolve to top-level entries.",
   });
 
-export const XReviewPayloadSchema = XReviewPayloadStructuralSchema.superRefine((payload, context) => {
+export const XContentSchema = XContentStructuralSchema.superRefine((content, context) => {
   const sourceIds = new Set<string>();
   const imageIds = new Set<string>();
   const candidateIds = new Set<string>();
 
-  payload.sources.forEach((source, index) => {
+  content.sources.forEach((source, index) => {
     if (sourceIds.has(source.sourceId)) {
       context.addIssue({
         code: "custom",
@@ -274,7 +247,7 @@ export const XReviewPayloadSchema = XReviewPayloadStructuralSchema.superRefine((
     sourceIds.add(source.sourceId);
   });
 
-  payload.images.forEach((image, index) => {
+  content.images.forEach((image, index) => {
     if (imageIds.has(image.imageId)) {
       context.addIssue({
         code: "custom",
@@ -285,7 +258,7 @@ export const XReviewPayloadSchema = XReviewPayloadStructuralSchema.superRefine((
     imageIds.add(image.imageId);
   });
 
-  payload.candidates.forEach((candidate, index) => {
+  content.candidates.forEach((candidate, index) => {
     if (candidateIds.has(candidate.candidateId)) {
       context.addIssue({
         code: "custom",
@@ -316,11 +289,27 @@ export const XReviewPayloadSchema = XReviewPayloadStructuralSchema.superRefine((
     });
   });
 
-  if (payload.recommendation && !candidateIds.has(payload.recommendation.candidateId)) {
+  if (content.candidates.length === 1 && content.recommendation) {
+    context.addIssue({
+      code: "custom",
+      path: ["recommendation"],
+      message: "recommendation must be omitted when only one candidate exists",
+    });
+  }
+
+  if (content.candidates.length > 1 && !content.recommendation) {
+    context.addIssue({
+      code: "custom",
+      path: ["recommendation"],
+      message: "recommendation is required when multiple candidates exist",
+    });
+  }
+
+  if (content.recommendation && !candidateIds.has(content.recommendation.candidateId)) {
     context.addIssue({
       code: "custom",
       path: ["recommendation", "candidateId"],
-      message: `Recommendation references missing candidateId ${payload.recommendation.candidateId}`,
+      message: `Recommendation references missing candidateId ${content.recommendation.candidateId}`,
     });
   }
 });
@@ -330,14 +319,14 @@ export type OperatorRef = z.infer<typeof OperatorRefSchema>;
 export type SourceRef = z.infer<typeof SourceRefSchema>;
 export type ImageRef = z.infer<typeof ImageRefSchema>;
 export type XCandidate = z.infer<typeof XCandidateSchema>;
-export type XReviewPayload = z.infer<typeof XReviewPayloadSchema>;
+export type XContent = z.infer<typeof XContentSchema>;
 
-export function parseXReviewPayload(value: unknown): XReviewPayload {
-  return XReviewPayloadSchema.parse(value);
+export function parseXContent(value: unknown): XContent {
+  return XContentSchema.parse(value);
 }
 
-export function createXReviewPayloadJsonSchema(): Record<string, unknown> {
-  const generated = z.toJSONSchema(XReviewPayloadStructuralSchema, {
+export function createXContentJsonSchema(): Record<string, unknown> {
+  const generated = z.toJSONSchema(XContentStructuralSchema, {
     target: "draft-2020-12",
     io: "input",
   }) as Record<string, unknown>;
@@ -345,7 +334,7 @@ export function createXReviewPayloadJsonSchema(): Record<string, unknown> {
   const { $schema: _generatedDialect, ...schema } = generated;
   return {
     $schema: "https://json-schema.org/draft/2020-12/schema",
-    $id: "https://pulse.sharebravery.dev/schemas/x-review-payload/v1",
+    $id: "https://pulse.sharebravery.dev/schemas/x-content/v1",
     ...schema,
   };
 }

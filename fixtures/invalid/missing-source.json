@@ -1,22 +1,21 @@
 {
-  "schemaVersion": "x-review-payload/v1",
-  "reviewId": "x-primary-20260723-missing-source",
+  "schemaVersion": "x-content/v1",
+  "contentId": "x-primary-20260723-missing-source",
   "generatedAt": "2026-07-23T09:40:00+08:00",
-  "timezone": "Asia/Hong_Kong",
+  "displayTitle": "Missing source reference",
   "account": {
     "platform": "x",
     "accountId": "primary"
   },
   "operator": {
     "name": "pulse-x",
-    "repo": "sharebravery/pulse-x",
-    "commit": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    "repository": "sharebravery/pulse-x",
+    "commitSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
   },
   "event": {
-    "eventTitle": "Missing source reference",
-    "publishJudgment": "This fixture must fail semantic validation.",
-    "repeatReason": "首次覆盖",
-    "primaryDomain": "AI"
+    "title": "Missing source reference",
+    "whyItMatters": "This fixture must fail semantic validation.",
+    "domains": ["AI"]
   },
   "sources": [
     {
@@ -31,9 +30,8 @@
       "candidateId": "post-1",
       "kind": "post",
       "label": "Invalid reference",
-      "angle": "validation",
-      "reason": "The candidate references a source that is absent from the top-level array.",
-      "language": "en",
+      "angle": "Validation",
+      "translation": "该候选内容必须失败，因为它引用的来源不存在。",
       "sourceIds": ["missing"],
       "imageIds": [],
       "text": "This candidate must fail because its source reference does not exist."

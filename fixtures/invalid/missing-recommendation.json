@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "x-content/v1",
+  "contentId": "x-primary-20260723-no-recommendation",
+  "generatedAt": "2026-07-23T09:00:00+08:00",
+  "displayTitle": "Missing recommendation",
+  "account": {
+    "platform": "x",
+    "accountId": "primary"
+  },
+  "operator": {
+    "name": "pulse-x",
+    "repository": "sharebravery/pulse-x",
+    "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "event": {
+    "title": "Two valid content options",
+    "whyItMatters": "This fixture must fail because multiple candidates require a recommendation.",
+    "domains": ["AI"]
+  },
+  "sources": [
+    {
+      "sourceId": "official",
+      "title": "Official announcement",
+      "url": "https://example.com/announcement"
+    }
+  ],
+  "images": [],
+  "candidates": [
+    {
+      "candidateId": "c1",
+      "kind": "post",
+      "label": "First option",
+      "angle": "First angle",
+      "translation": "第一个选项。",
+      "sourceIds": ["official"],
+      "imageIds": [],
+      "text": "The first valid content option."
+    },
+    {
+      "candidateId": "c2",
+      "kind": "post",
+      "label": "Second option",
+      "angle": "Second angle",
+      "translation": "第二个选项。",
+      "sourceIds": ["official"],
+      "imageIds": [],
+      "text": "The second valid content option."
+    }
+  ]
+}

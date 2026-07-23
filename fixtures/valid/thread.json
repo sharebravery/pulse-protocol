@@ -1,23 +1,21 @@
 {
-  "schemaVersion": "x-review-payload/v1",
-  "reviewId": "x-primary-20260723-valid-thread",
+  "schemaVersion": "x-content/v1",
+  "contentId": "x-primary-20260723-valid-thread",
   "generatedAt": "2026-07-23T09:30:00+08:00",
-  "timezone": "Asia/Hong_Kong",
+  "displayTitle": "New robotics deployment milestone",
   "account": {
     "platform": "x",
     "accountId": "primary"
   },
   "operator": {
     "name": "pulse-x",
-    "repo": "sharebravery/pulse-x",
-    "commit": "dddddddddddddddddddddddddddddddddddddddd"
+    "repository": "sharebravery/pulse-x",
+    "commitSha": "dddddddddddddddddddddddddddddddddddddddd"
   },
   "event": {
-    "eventTitle": "New robotics deployment milestone",
-    "publishJudgment": "The deployment has enough operational detail to justify a short explanatory thread.",
-    "repeatReason": "首次覆盖",
-    "primaryDomain": "Robotics",
-    "relatedDomains": ["AI, software and tools"]
+    "title": "New robotics deployment milestone",
+    "whyItMatters": "The deployment has enough operational detail to justify a short explanatory thread.",
+    "domains": ["Robotics", "AI and software"]
   },
   "sources": [
     {
@@ -44,9 +42,8 @@
       "candidateId": "thread-1",
       "kind": "thread",
       "label": "Deployment breakdown",
-      "angle": "operational reality",
-      "reason": "The event requires separate posts for the deployment, the constraint, and the broader implication.",
-      "language": "en",
+      "angle": "Operational reality",
+      "translation": "1/3 机器人里程碑真正重要的时刻，是它从演示变成可重复运行的流程。这次部署终于提供了可供判断的细节。\n\n2/3 限制仍然是人工监督，以及与现有系统的集成。硬件进步本身并不会消除运营工作。\n\n3/3 下一项值得观察的信号不是另一段视频，而是在第二个客户处，以类似的正常运行时间和人员需求完成重复部署。",
       "sourceIds": ["deployment-note"],
       "imageIds": ["deployment-photo"],
       "posts": [

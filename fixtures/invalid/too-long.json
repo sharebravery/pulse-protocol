@@ -1,22 +1,21 @@
 {
-  "schemaVersion": "x-review-payload/v1",
-  "reviewId": "x-primary-20260723-too-long",
+  "schemaVersion": "x-content/v1",
+  "contentId": "x-primary-20260723-too-long",
   "generatedAt": "2026-07-23T09:00:00+08:00",
-  "timezone": "Asia/Hong_Kong",
+  "displayTitle": "Invalid example",
   "account": {
     "platform": "x",
     "accountId": "primary"
   },
   "operator": {
     "name": "pulse-x",
-    "repo": "sharebravery/pulse-x",
-    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    "repository": "sharebravery/pulse-x",
+    "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   },
   "event": {
-    "eventTitle": "Invalid example",
-    "publishJudgment": "This fixture must fail.",
-    "repeatReason": "首次覆盖",
-    "primaryDomain": "AI"
+    "title": "Invalid example",
+    "whyItMatters": "This fixture must fail.",
+    "domains": ["AI"]
   },
   "sources": [
     {
@@ -31,9 +30,8 @@
       "candidateId": "c1",
       "kind": "post",
       "label": "Invalid",
-      "angle": "length",
-      "reason": "The text is longer than 280 characters.",
-      "language": "en",
+      "angle": "Length",
+      "translation": "该文本超过 280 个字符。",
       "sourceIds": ["official"],
       "imageIds": [],
       "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
