@@ -25,7 +25,6 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
-      - run: pnpm test
       - run: pnpm generate
       - name: Upload generated X content schema
         if: always()
@@ -35,6 +34,7 @@ jobs:
           path: schemas/x-content/v1.schema.json
           if-no-files-found: error
           retention-days: 1
+      - run: pnpm test
       - name: Verify generated contracts are current
         run: git diff --exit-code -- schemas
       - run: pnpm build
