@@ -1,13 +1,8 @@
 {
   "schemaVersion": "x-content/v1",
-  "contentId": "x-primary-20260723-example-post",
+  "contentId": "x-20260723-example-post",
   "generatedAt": "2026-07-23T09:00:00+08:00",
   "displayTitle": "Example launch changes a developer workflow",
-  "account": {
-    "platform": "x",
-    "accountId": "primary",
-    "handle": "sharebravery"
-  },
   "operator": {
     "name": "pulse-x",
     "repository": "sharebravery/pulse-x",

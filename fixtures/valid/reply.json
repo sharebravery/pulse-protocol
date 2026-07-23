@@ -1,12 +1,8 @@
 {
   "schemaVersion": "x-content/v1",
-  "contentId": "x-primary-20260723-valid-reply",
+  "contentId": "x-20260723-valid-reply",
   "generatedAt": "2026-07-23T09:10:00+08:00",
   "displayTitle": "Developer tooling update",
-  "account": {
-    "platform": "x",
-    "accountId": "primary"
-  },
   "operator": {
     "name": "pulse-x",
     "repository": "sharebravery/pulse-x",

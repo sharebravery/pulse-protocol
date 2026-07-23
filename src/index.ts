@@ -1,5 +1,4 @@
 export {
-  AccountRefSchema,
   ImageRefSchema,
   OperatorRefSchema,
   SourceRefSchema,
@@ -10,7 +9,6 @@ export {
 } from "./x-content.js";
 
 export type {
-  AccountRef,
   ImageRef,
   OperatorRef,
   SourceRef,
@@ -19,7 +17,6 @@ export type {
 } from "./x-content.js";
 
 export {
-  XhsAccountRefSchema,
   XhsContentSchema,
   XhsOperatorRefSchema,
   XhsTitleSchema,
@@ -28,7 +25,6 @@ export {
 } from "./xhs-content.js";
 
 export type {
-  XhsAccountRef,
   XhsContent,
   XhsOperatorRef,
   XhsTitle,
