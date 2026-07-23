@@ -108,6 +108,17 @@ const TargetSchema = z
   })
   .describe("Required target metadata for reply and quote candidates.");
 
+const ReviewTranslationSchema = z
+  .strictObject({
+    language: z.literal("zh-CN").describe("Language of the review-only translation."),
+    text: z
+      .string()
+      .min(1)
+      .max(8000)
+      .describe("Simplified Chinese translation for reviewer comprehension. Never publish it as X copy."),
+  })
+  .describe("Optional reviewer aid that does not change the publishable English candidate.");
+
 const candidateBaseShape = {
   candidateId: localIdSchema.describe("Unique candidate identifier within this payload."),
   label: z.string().min(1).max(80).describe("Short internal label distinguishing this candidate."),
@@ -118,6 +129,9 @@ const candidateBaseShape = {
     .max(500)
     .describe("Why this form and angle are worth reviewing instead of being a wording variant."),
   language: z.literal("en").describe("Phase 1 X candidates are written in English."),
+  reviewTranslation: ReviewTranslationSchema.optional().describe(
+    "Optional Simplified Chinese translation shown only in the review experience.",
+  ),
   sourceIds: sourceIdsSchema,
   imageIds: imageIdsSchema,
 };
@@ -186,6 +200,12 @@ const XReviewPayloadStructuralSchema = z
     operator: OperatorRefSchema,
     event: z
       .strictObject({
+        reviewTitle: z
+          .string()
+          .min(1)
+          .max(100)
+          .optional()
+          .describe("Optional concise title for the review email subject and header."),
         eventTitle: z.string().min(1).max(180).describe("Concise factual title for the underlying event."),
         publishJudgment: z
           .string()
@@ -220,6 +240,17 @@ const XReviewPayloadStructuralSchema = z
       .min(1)
       .max(3)
       .describe("One to three materially different, fully formed X candidates. candidateId values must be unique."),
+    recommendation: z
+      .strictObject({
+        candidateId: localIdSchema.describe("Candidate recommended as the default review choice."),
+        reason: z
+          .string()
+          .min(1)
+          .max(500)
+          .describe("Why this candidate is the strongest default choice for the reviewer."),
+      })
+      .optional()
+      .describe("Optional recommendation, especially useful when the payload contains multiple candidates."),
   })
   .meta({
     title: "Pulse X Review Payload v1",
@@ -284,6 +315,14 @@ export const XReviewPayloadSchema = XReviewPayloadStructuralSchema.superRefine((
       }
     });
   });
+
+  if (payload.recommendation && !candidateIds.has(payload.recommendation.candidateId)) {
+    context.addIssue({
+      code: "custom",
+      path: ["recommendation", "candidateId"],
+      message: `Recommendation references missing candidateId ${payload.recommendation.candidateId}`,
+    });
+  }
 });
 
 export type AccountRef = z.infer<typeof AccountRefSchema>;
