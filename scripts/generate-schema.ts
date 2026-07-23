@@ -3,12 +3,17 @@ import { dirname, resolve } from "node:path";
 import {
   createPublicationResultJsonSchema,
   createXContentJsonSchema,
+  createXhsContentJsonSchema,
 } from "../src/index.js";
 
 const schemas = [
   {
     path: "schemas/x-content/v1.schema.json",
     value: createXContentJsonSchema(),
+  },
+  {
+    path: "schemas/xhs-content/v1.schema.json",
+    value: createXhsContentJsonSchema(),
   },
   {
     path: "schemas/publication-result/v1.schema.json",
