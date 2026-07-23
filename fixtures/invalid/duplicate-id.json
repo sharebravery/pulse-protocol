@@ -1,22 +1,21 @@
 {
-  "schemaVersion": "x-review-payload/v1",
-  "reviewId": "x-primary-20260723-duplicate-id",
+  "schemaVersion": "x-content/v1",
+  "contentId": "x-primary-20260723-duplicate-id",
   "generatedAt": "2026-07-23T09:50:00+08:00",
-  "timezone": "Asia/Hong_Kong",
+  "displayTitle": "Duplicate source identifier",
   "account": {
     "platform": "x",
     "accountId": "primary"
   },
   "operator": {
     "name": "pulse-x",
-    "repo": "sharebravery/pulse-x",
-    "commit": "ffffffffffffffffffffffffffffffffffffffff"
+    "repository": "sharebravery/pulse-x",
+    "commitSha": "ffffffffffffffffffffffffffffffffffffffff"
   },
   "event": {
-    "eventTitle": "Duplicate source identifier",
-    "publishJudgment": "This fixture must fail semantic validation.",
-    "repeatReason": "首次覆盖",
-    "primaryDomain": "AI"
+    "title": "Duplicate source identifier",
+    "whyItMatters": "This fixture must fail semantic validation.",
+    "domains": ["AI"]
   },
   "sources": [
     {
@@ -36,9 +35,8 @@
       "candidateId": "post-1",
       "kind": "post",
       "label": "Invalid duplicate",
-      "angle": "validation",
-      "reason": "The top-level sources array contains a duplicate sourceId.",
-      "language": "en",
+      "angle": "Validation",
+      "translation": "该候选内容必须失败，因为来源标识并不唯一。",
       "sourceIds": ["official"],
       "imageIds": [],
       "text": "This candidate must fail because source identifiers are not unique."
