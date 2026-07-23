@@ -142,29 +142,13 @@
     },
     "submissionUrl": {
       "description": "Optional platform submission, pull request, or edit URL.",
-      "anyOf": [
-        {
-          "type": "string",
-          "format": "uri",
-          "description": "Public HTTPS URL. HTTP, local, credential-bearing, and non-web URLs are not allowed."
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "type": "string",
+      "format": "uri"
     },
     "publishedUrl": {
       "description": "Canonical public URL after successful publication.",
-      "anyOf": [
-        {
-          "type": "string",
-          "format": "uri",
-          "description": "Public HTTPS URL. HTTP, local, credential-bearing, and non-web URLs are not allowed."
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "type": "string",
+      "format": "uri"
     },
     "commitSha": {
       "description": "Optional exact Git commit associated with the platform submission.",
@@ -200,16 +184,8 @@
         },
         "url": {
           "description": "Optional workflow, log, or platform URL.",
-          "anyOf": [
-            {
-              "type": "string",
-              "format": "uri",
-              "description": "Public HTTPS URL. HTTP, local, credential-bearing, and non-web URLs are not allowed."
-            },
-            {
-              "type": "null"
-            }
-          ]
+          "type": "string",
+          "format": "uri"
         }
       },
       "required": [
