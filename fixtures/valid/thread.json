@@ -1,12 +1,8 @@
 {
   "schemaVersion": "x-content/v1",
-  "contentId": "x-primary-20260723-valid-thread",
+  "contentId": "x-20260723-valid-thread",
   "generatedAt": "2026-07-23T09:30:00+08:00",
   "displayTitle": "New robotics deployment milestone",
-  "account": {
-    "platform": "x",
-    "accountId": "primary"
-  },
   "operator": {
     "name": "pulse-x",
     "repository": "sharebravery/pulse-x",
