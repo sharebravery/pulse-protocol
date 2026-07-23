@@ -4,10 +4,10 @@ Shared, versioned data contracts for the Pulse system.
 
 ## Source of truth
 
-Zod 4 is the single source of truth for `x-review-payload/v1`:
+Zod 4 is the single source of truth for `x-content/v1`:
 
 ```text
-src/x-review-payload.ts
+src/x-content.ts
 ├── runtime validation
 ├── inferred TypeScript types
 └── generated JSON Schema
@@ -16,7 +16,7 @@ src/x-review-payload.ts
 The committed machine-readable contract is:
 
 ```text
-schemas/x-review-payload/v1.schema.json
+schemas/x-content/v1.schema.json
 ```
 
 The JSON Schema is generated from Zod and must never be edited by hand.
@@ -27,16 +27,18 @@ This repository is an ESM TypeScript package. Consumers import runtime validatio
 
 ```ts
 import {
-  parseXReviewPayload,
-  type XReviewPayload,
+  parseXContent,
+  type XContent,
 } from "@sharebravery/pulse-protocol";
 ```
 
-During development, downstream repositories pin the public Git repository to a full commit SHA. Upgrades are therefore explicit and reproducible.
+During development, downstream repositories pin the public Git repository to a full commit SHA. Upgrades are explicit and reproducible.
 
-## Phase 1
+## Current contracts
 
-A task AI reads the generated JSON Schema, constructs one complete payload, and pushes it to `pulse-relay/inbox/reviews/`.
+- `x-content/v1`: publishable X content, sources, optional media, and materially distinct content candidates.
+
+A task AI constructs one complete `x-content/v1` document and adds it to `pulse-relay/inbox/ready/`.
 
 ## Repository scope
 
@@ -60,5 +62,5 @@ pnpm check
 - Compatible optional fields may be added without changing the contract version.
 - Required-field changes, removals, renames, or semantic changes create a new contract version.
 - A released contract version never changes meaning.
-- Package versions and payload contract versions are independent.
+- Package versions and contract versions are independent.
 - The task AI treats the generated JSON Schema as the execution contract; prose descriptions clarify semantics but do not replace validation rules.
