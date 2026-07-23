@@ -12,8 +12,6 @@ const httpsUrlSchema = z
   .url({ protocol: /^https$/ })
   .describe("Public HTTPS URL. HTTP, local, credential-bearing, and non-web URLs are not allowed.");
 
-const nullableHttpsUrlSchema = httpsUrlSchema.nullable();
-
 const ContentSummarySchema = z
   .strictObject({
     kind: z.enum(["article", "social_post"]).describe("Kind of content submitted to the platform."),
@@ -56,7 +54,7 @@ const PublicationErrorSchema = z
   .strictObject({
     stage: z.string().min(1).max(80).describe("Operation stage that failed."),
     message: z.string().min(1).max(2000).describe("Concise failure message."),
-    url: nullableHttpsUrlSchema.optional().describe("Optional workflow, log, or platform URL."),
+    url: httpsUrlSchema.optional().describe("Optional workflow, log, or platform URL."),
   })
   .describe("Failure details when publication does not complete.");
 
@@ -77,10 +75,10 @@ const PublicationResultStructuralSchema = z
       .describe("Current platform outcome for this publication attempt."),
     content: ContentSummarySchema,
     destination: DestinationSchema,
-    submissionUrl: nullableHttpsUrlSchema
+    submissionUrl: httpsUrlSchema
       .optional()
       .describe("Optional platform submission, pull request, or edit URL."),
-    publishedUrl: nullableHttpsUrlSchema
+    publishedUrl: httpsUrlSchema
       .optional()
       .describe("Canonical public URL after successful publication."),
     commitSha: z
