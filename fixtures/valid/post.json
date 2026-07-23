@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "x-review-payload/v1",
-  "reviewId": "x-primary-20260723-example-post",
+  "schemaVersion": "x-content/v1",
+  "contentId": "x-primary-20260723-example-post",
   "generatedAt": "2026-07-23T09:00:00+08:00",
-  "timezone": "Asia/Hong_Kong",
+  "displayTitle": "Example launch changes a developer workflow",
   "account": {
     "platform": "x",
     "accountId": "primary",
@@ -10,15 +10,13 @@
   },
   "operator": {
     "name": "pulse-x",
-    "repo": "sharebravery/pulse-x",
-    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    "repository": "sharebravery/pulse-x",
+    "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   },
   "event": {
-    "reviewTitle": "Example launch changes a developer workflow",
-    "eventTitle": "Example product launch",
-    "publishJudgment": "The release materially changes a common developer workflow.",
-    "repeatReason": "首次覆盖",
-    "primaryDomain": "AI, software and tools"
+    "title": "Example product launch",
+    "whyItMatters": "The release materially changes a common developer workflow.",
+    "domains": ["AI and software"]
   },
   "sources": [
     {
@@ -35,20 +33,11 @@
       "candidateId": "c1",
       "kind": "post",
       "label": "Direct take",
-      "angle": "developer impact",
-      "reason": "Clear user-facing consequence.",
-      "language": "en",
-      "reviewTranslation": {
-        "language": "zh-CN",
-        "text": "一条基于官方公告、突出开发者影响的简洁示例帖子。"
-      },
+      "angle": "Developer impact",
+      "translation": "一条基于官方公告、突出开发者影响的简洁示例帖子。",
       "sourceIds": ["official"],
       "imageIds": [],
       "text": "A concise example post grounded in the official announcement."
     }
-  ],
-  "recommendation": {
-    "candidateId": "c1",
-    "reason": "It is the clearest default choice for this event."
-  }
+  ]
 }
