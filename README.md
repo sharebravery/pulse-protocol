@@ -8,10 +8,11 @@ Zod 4 is the single source of truth for every contract:
 
 ```text
 src/x-content.ts
+src/xhs-content.ts
 src/publication-result.ts
 ```
 
-Each source file provides runtime validation, inferred TypeScript types, and a generated JSON Schema. Generated schemas under `schemas/` must never be edited by hand.
+Each source file provides runtime validation, inferred TypeScript types, and a generated JSON Schema. Generated schemas under `schemas/` are produced by `pnpm generate`.
 
 ## Package API
 
@@ -21,8 +22,10 @@ Consumers import runtime parsers and inferred types from `@sharebravery/pulse-pr
 import {
   parsePublicationResult,
   parseXContent,
+  parseXhsContent,
   type PublicationResult,
   type XContent,
+  type XhsContent,
 } from "@sharebravery/pulse-protocol";
 ```
 
@@ -31,13 +34,14 @@ Downstream repositories pin this public Git repository to a full commit SHA. Upg
 ## Current contracts
 
 - `x-content/v1`: publishable X content, sources, optional media, and materially distinct content candidates.
+- `xhs-content/v1`: publishable Xiaohongshu titles, body, tags, cover text, sources, and optional media.
 - `publication-result/v1`: compact platform submission or publication outcome, including destination, status, links, and failure details.
 
-Tasks add complete delivery inputs to `pulse-relay/inbox/ready/`. Full article bodies and content archives do not belong in Relay.
+Tasks add complete delivery inputs to `pulse-relay/inbox/ready/`.
 
 ## Repository scope
 
-This repository contains contracts, generated JSON Schemas, validation fixtures, and package code. It does not contain operator state, email templates, credentials, workflows from other repositories, or publication history.
+This repository contains versioned contracts, generated JSON Schemas, validation fixtures, and package code.
 
 ## Commands
 

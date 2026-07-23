@@ -19,6 +19,22 @@ export type {
 } from "./x-content.js";
 
 export {
+  XhsAccountRefSchema,
+  XhsContentSchema,
+  XhsOperatorRefSchema,
+  XhsTitleSchema,
+  createXhsContentJsonSchema,
+  parseXhsContent,
+} from "./xhs-content.js";
+
+export type {
+  XhsAccountRef,
+  XhsContent,
+  XhsOperatorRef,
+  XhsTitle,
+} from "./xhs-content.js";
+
+export {
   PublicationResultSchema,
   createPublicationResultJsonSchema,
   parsePublicationResult,

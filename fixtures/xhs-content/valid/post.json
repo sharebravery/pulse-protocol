@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "xhs-content/v1",
+  "contentId": "xhs-primary-20260723-power-grid",
+  "generatedAt": "2026-07-23T18:00:00+08:00",
+  "displayTitle": "AI competition is becoming a power race",
+  "account": {
+    "platform": "xhs",
+    "accountId": "primary",
+    "displayName": "ShareBravery"
+  },
+  "operator": {
+    "name": "pulse-xhs",
+    "repository": "sharebravery/pulse-xhs",
+    "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "event": {
+    "title": "AI infrastructure expansion increases demand for long-term power capacity",
+    "whyItMatters": "Power access, grid construction, and load management are becoming constraints on AI expansion.",
+    "domains": ["AI infrastructure", "Energy"]
+  },
+  "sources": [
+    {
+      "sourceId": "official",
+      "title": "Official project announcement",
+      "url": "https://example.com/project",
+      "publishedAt": "2026-07-23T08:00:00Z",
+      "kind": "official"
+    }
+  ],
+  "images": [],
+  "titles": [
+    {
+      "titleId": "power-race",
+      "text": "AI 竞争，最后可能拼的是谁先拿到电"
+    },
+    {
+      "titleId": "grid-bottleneck",
+      "text": "GPU 还没不够，电网先成了 AI 扩张瓶颈"
+    }
+  ],
+  "recommendedTitleId": "power-race",
+  "body": "AI 基础设施竞争正在换赛道。GPU 依然重要，但决定扩张速度的因素，正在延伸到长期供电、输电建设和高峰负荷管理。真正稀缺的可能不只是芯片，而是能够稳定承载大规模计算的电力系统。",
+  "tags": ["AI", "科技", "数据中心"],
+  "coverText": "AI 开始抢电了",
+  "sourceIds": ["official"],
+  "imageIds": []
+}
