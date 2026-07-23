@@ -1,6 +1,6 @@
 {
   "name": "@sharebravery/pulse-protocol",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Versioned Zod and JSON Schema contracts for the Pulse system.",
   "private": false,
   "type": "module",
@@ -11,7 +11,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./schemas/x-content/v1": "./schemas/x-content/v1.schema.json"
+    "./schemas/x-content/v1": "./schemas/x-content/v1.schema.json",
+    "./schemas/publication-result/v1": "./schemas/publication-result/v1.schema.json"
   },
   "files": [
     "dist",

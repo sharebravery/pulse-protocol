@@ -17,3 +17,11 @@ export type {
   XCandidate,
   XContent,
 } from "./x-content.js";
+
+export {
+  PublicationResultSchema,
+  createPublicationResultJsonSchema,
+  parsePublicationResult,
+} from "./publication-result.js";
+
+export type { PublicationResult } from "./publication-result.js";

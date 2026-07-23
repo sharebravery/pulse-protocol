@@ -4,45 +4,40 @@ Shared, versioned data contracts for the Pulse system.
 
 ## Source of truth
 
-Zod 4 is the single source of truth for `x-content/v1`:
+Zod 4 is the single source of truth for every contract:
 
 ```text
 src/x-content.ts
-├── runtime validation
-├── inferred TypeScript types
-└── generated JSON Schema
+src/publication-result.ts
 ```
 
-The committed machine-readable contract is:
-
-```text
-schemas/x-content/v1.schema.json
-```
-
-The JSON Schema is generated from Zod and must never be edited by hand.
+Each source file provides runtime validation, inferred TypeScript types, and a generated JSON Schema. Generated schemas under `schemas/` must never be edited by hand.
 
 ## Package API
 
-This repository is an ESM TypeScript package. Consumers import runtime validation and inferred types from `@sharebravery/pulse-protocol`:
+Consumers import runtime parsers and inferred types from `@sharebravery/pulse-protocol`:
 
 ```ts
 import {
+  parsePublicationResult,
   parseXContent,
+  type PublicationResult,
   type XContent,
 } from "@sharebravery/pulse-protocol";
 ```
 
-During development, downstream repositories pin the public Git repository to a full commit SHA. Upgrades are explicit and reproducible.
+Downstream repositories pin this public Git repository to a full commit SHA. Upgrades are explicit and reproducible.
 
 ## Current contracts
 
 - `x-content/v1`: publishable X content, sources, optional media, and materially distinct content candidates.
+- `publication-result/v1`: compact platform submission or publication outcome, including destination, status, links, and failure details.
 
-A task AI constructs one complete `x-content/v1` document and adds it to `pulse-relay/inbox/ready/`.
+Tasks add complete delivery inputs to `pulse-relay/inbox/ready/`. Full article bodies and content archives do not belong in Relay.
 
 ## Repository scope
 
-This repository contains contracts, generated JSON Schemas, validation fixtures, and package code. It does not contain operator state, email templates, credentials, workflows from other repositories, or publication data.
+This repository contains contracts, generated JSON Schemas, validation fixtures, and package code. It does not contain operator state, email templates, credentials, workflows from other repositories, or publication history.
 
 ## Commands
 
@@ -63,4 +58,4 @@ pnpm check
 - Required-field changes, removals, renames, or semantic changes create a new contract version.
 - A released contract version never changes meaning.
 - Package versions and contract versions are independent.
-- The task AI treats the generated JSON Schema as the execution contract; prose descriptions clarify semantics but do not replace validation rules.
+- Generated JSON Schema is the execution contract; prose clarifies semantics but does not replace validation rules.
