@@ -81,6 +81,12 @@
     "event": {
       "type": "object",
       "properties": {
+        "reviewTitle": {
+          "description": "Optional concise title for the review email subject and header.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
         "eventTitle": {
           "type": "string",
           "minLength": 1,
@@ -268,6 +274,28 @@
                 "const": "en",
                 "description": "Phase 1 X candidates are written in English."
               },
+              "reviewTranslation": {
+                "description": "Optional Simplified Chinese translation shown only in the review experience.",
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string",
+                    "const": "zh-CN",
+                    "description": "Language of the review-only translation."
+                  },
+                  "text": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 8000,
+                    "description": "Simplified Chinese translation for reviewer comprehension. Never publish it as X copy."
+                  }
+                },
+                "required": [
+                  "language",
+                  "text"
+                ],
+                "additionalProperties": false
+              },
               "sourceIds": {
                 "minItems": 1,
                 "type": "array",
@@ -344,6 +372,28 @@
                 "type": "string",
                 "const": "en",
                 "description": "Phase 1 X candidates are written in English."
+              },
+              "reviewTranslation": {
+                "description": "Optional Simplified Chinese translation shown only in the review experience.",
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string",
+                    "const": "zh-CN",
+                    "description": "Language of the review-only translation."
+                  },
+                  "text": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 8000,
+                    "description": "Simplified Chinese translation for reviewer comprehension. Never publish it as X copy."
+                  }
+                },
+                "required": [
+                  "language",
+                  "text"
+                ],
+                "additionalProperties": false
               },
               "sourceIds": {
                 "minItems": 1,
@@ -452,6 +502,28 @@
                 "const": "en",
                 "description": "Phase 1 X candidates are written in English."
               },
+              "reviewTranslation": {
+                "description": "Optional Simplified Chinese translation shown only in the review experience.",
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string",
+                    "const": "zh-CN",
+                    "description": "Language of the review-only translation."
+                  },
+                  "text": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 8000,
+                    "description": "Simplified Chinese translation for reviewer comprehension. Never publish it as X copy."
+                  }
+                },
+                "required": [
+                  "language",
+                  "text"
+                ],
+                "additionalProperties": false
+              },
               "sourceIds": {
                 "minItems": 1,
                 "type": "array",
@@ -559,6 +631,28 @@
                 "const": "en",
                 "description": "Phase 1 X candidates are written in English."
               },
+              "reviewTranslation": {
+                "description": "Optional Simplified Chinese translation shown only in the review experience.",
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string",
+                    "const": "zh-CN",
+                    "description": "Language of the review-only translation."
+                  },
+                  "text": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 8000,
+                    "description": "Simplified Chinese translation for reviewer comprehension. Never publish it as X copy."
+                  }
+                },
+                "required": [
+                  "language",
+                  "text"
+                ],
+                "additionalProperties": false
+              },
               "sourceIds": {
                 "minItems": 1,
                 "type": "array",
@@ -615,6 +709,28 @@
         "description": "One complete X candidate: post, reply, quote, or thread."
       },
       "description": "One to three materially different, fully formed X candidates. candidateId values must be unique."
+    },
+    "recommendation": {
+      "description": "Optional recommendation, especially useful when the payload contains multiple candidates.",
+      "type": "object",
+      "properties": {
+        "candidateId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "description": "Candidate recommended as the default review choice."
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Why this candidate is the strongest default choice for the reviewer."
+        }
+      },
+      "required": [
+        "candidateId",
+        "reason"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
