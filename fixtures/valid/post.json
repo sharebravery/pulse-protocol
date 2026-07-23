@@ -14,6 +14,7 @@
     "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   },
   "event": {
+    "reviewTitle": "Example launch changes a developer workflow",
     "eventTitle": "Example product launch",
     "publishJudgment": "The release materially changes a common developer workflow.",
     "repeatReason": "首次覆盖",
@@ -37,9 +38,17 @@
       "angle": "developer impact",
       "reason": "Clear user-facing consequence.",
       "language": "en",
+      "reviewTranslation": {
+        "language": "zh-CN",
+        "text": "一条基于官方公告、突出开发者影响的简洁示例帖子。"
+      },
       "sourceIds": ["official"],
       "imageIds": [],
       "text": "A concise example post grounded in the official announcement."
     }
-  ]
+  ],
+  "recommendation": {
+    "candidateId": "c1",
+    "reason": "It is the clearest default choice for this event."
+  }
 }
