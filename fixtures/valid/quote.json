@@ -1,22 +1,21 @@
 {
-  "schemaVersion": "x-review-payload/v1",
-  "reviewId": "x-primary-20260723-valid-quote",
+  "schemaVersion": "x-content/v1",
+  "contentId": "x-primary-20260723-valid-quote",
   "generatedAt": "2026-07-23T09:20:00+08:00",
-  "timezone": "Asia/Hong_Kong",
+  "displayTitle": "Infrastructure pricing change",
   "account": {
     "platform": "x",
     "accountId": "primary"
   },
   "operator": {
     "name": "pulse-x",
-    "repo": "sharebravery/pulse-x",
-    "commit": "cccccccccccccccccccccccccccccccccccccccc"
+    "repository": "sharebravery/pulse-x",
+    "commitSha": "cccccccccccccccccccccccccccccccccccccccc"
   },
   "event": {
-    "eventTitle": "Infrastructure pricing change",
-    "publishJudgment": "The new pricing changes the cost assumptions for developers and is suitable for a quote post.",
-    "repeatReason": "首次覆盖",
-    "primaryDomain": "Technology business"
+    "title": "Infrastructure pricing change",
+    "whyItMatters": "The new pricing changes the cost assumptions for developers and is suitable for a quote post.",
+    "domains": ["Technology business"]
   },
   "sources": [
     {
@@ -33,9 +32,8 @@
       "candidateId": "quote-1",
       "kind": "quote",
       "label": "Cost consequence",
-      "angle": "developer economics",
-      "reason": "Connects the announcement to the practical cost of operating the product.",
-      "language": "en",
+      "angle": "Developer economics",
+      "translation": "标题是单位价格下降。真正的问题是总用量会不会增长得比节省更快，最终让团队账单反而更高。",
       "sourceIds": ["pricing-page"],
       "imageIds": [],
       "text": "The headline is the lower unit price. The real question is whether total usage grows faster than the savings, leaving teams with a larger bill anyway.",
