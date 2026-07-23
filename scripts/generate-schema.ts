@@ -1,11 +1,24 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { createXContentJsonSchema } from "../src/x-content.js";
+import {
+  createPublicationResultJsonSchema,
+  createXContentJsonSchema,
+} from "../src/index.js";
 
-const outputPath = resolve(process.cwd(), "schemas/x-content/v1.schema.json");
-const schema = createXContentJsonSchema();
+const schemas = [
+  {
+    path: "schemas/x-content/v1.schema.json",
+    value: createXContentJsonSchema(),
+  },
+  {
+    path: "schemas/publication-result/v1.schema.json",
+    value: createPublicationResultJsonSchema(),
+  },
+];
 
-await mkdir(dirname(outputPath), { recursive: true });
-await writeFile(outputPath, `${JSON.stringify(schema, null, 2)}\n`, "utf8");
-
-console.log(`Generated ${outputPath}`);
+for (const schema of schemas) {
+  const outputPath = resolve(process.cwd(), schema.path);
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, `${JSON.stringify(schema.value, null, 2)}\n`, "utf8");
+  console.log(`Generated ${outputPath}`);
+}
