@@ -25,12 +25,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
-      - run: pnpm generate
-      - uses: actions/upload-artifact@v4
-        with:
-          name: generated-schemas
-          path: schemas
       - run: pnpm test
+      - run: pnpm generate
       - name: Verify generated contracts are current
         run: git diff --exit-code -- schemas
       - run: pnpm build
