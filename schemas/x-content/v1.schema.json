@@ -1,0 +1,629 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pulse.sharebravery.dev/schemas/x-content/v1",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "x-content/v1",
+      "description": "Versioned contract identifier. Change only when the data contract becomes incompatible."
+    },
+    "contentId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{7,127}$",
+      "description": "Globally unique, stable content identifier. Use lowercase letters, digits, and hyphens."
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+      "description": "Time the complete content document was generated."
+    },
+    "displayTitle": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Concise title used in the Pulse X email subject and header."
+    },
+    "account": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string",
+          "const": "x",
+          "description": "Target platform for this content."
+        },
+        "accountId": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,63}$",
+          "description": "Stable Pulse account identifier, such as primary."
+        },
+        "handle": {
+          "description": "Optional current public X handle without changing the stable accountId.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "platform",
+        "accountId"
+      ],
+      "additionalProperties": false,
+      "description": "X account receiving the content options."
+    },
+    "operator": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "const": "pulse-x",
+          "description": "Operator that produced the content."
+        },
+        "repository": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+\\/[A-Za-z0-9_.-]+$",
+          "description": "GitHub repository in owner/name form containing the operator rules."
+        },
+        "commitSha": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{40}$",
+          "description": "Exact 40-character Git commit used to produce the content."
+        }
+      },
+      "required": [
+        "name",
+        "repository",
+        "commitSha"
+      ],
+      "additionalProperties": false,
+      "description": "Immutable provenance for the operator rules used during generation."
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 180,
+          "description": "Concise factual title for the underlying event."
+        },
+        "whyItMatters": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Why the event is consequential enough to publish."
+        },
+        "domains": {
+          "minItems": 1,
+          "maxItems": 3,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "description": "Ordered editorial domains, with the primary domain first."
+        }
+      },
+      "required": [
+        "title",
+        "whyItMatters",
+        "domains"
+      ],
+      "additionalProperties": false,
+      "description": "Shared event context supporting every candidate."
+    },
+    "sources": {
+      "minItems": 1,
+      "maxItems": 12,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+            "description": "Unique source identifier referenced by candidates."
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300,
+            "description": "Human-readable source title."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Canonical public HTTPS page supporting the stated facts."
+          },
+          "publishedAt": {
+            "description": "Source publication time when reliably available.",
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+          },
+          "kind": {
+            "description": "Optional normalized source category.",
+            "type": "string",
+            "enum": [
+              "official",
+              "filing",
+              "regulator",
+              "paper",
+              "incident_report",
+              "reporting",
+              "other"
+            ]
+          }
+        },
+        "required": [
+          "sourceId",
+          "title",
+          "url"
+        ],
+        "additionalProperties": false,
+        "description": "A traceable source used to verify the event or candidate claims."
+      },
+      "description": "Verified sources. sourceId values must be unique and support candidate claims."
+    },
+    "images": {
+      "maxItems": 2,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "imageId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+            "description": "Unique image identifier referenced by candidates."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Direct public HTTPS image URL downloaded temporarily by Relay."
+          },
+          "sourcePageUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "Public HTTPS page where the image originally appears."
+          },
+          "alt": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "Accessible description of the image content."
+          },
+          "caption": {
+            "description": "Optional concise explanation of why the image matters.",
+            "type": "string",
+            "maxLength": 500
+          },
+          "sourceName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "description": "Organization or publisher that supplied the image."
+          },
+          "usage": {
+            "type": "string",
+            "enum": [
+              "primary",
+              "supporting"
+            ],
+            "description": "Whether the image is the main visual or supporting evidence."
+          }
+        },
+        "required": [
+          "imageId",
+          "url",
+          "sourcePageUrl",
+          "alt",
+          "sourceName",
+          "usage"
+        ],
+        "additionalProperties": false,
+        "description": "Optional evidence or explanatory image. Images are never required to fill a quota."
+      },
+      "description": "Zero to two useful images. imageId values must be unique."
+    },
+    "candidates": {
+      "minItems": 1,
+      "maxItems": 3,
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "candidateId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                "description": "Unique candidate identifier within this content document."
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "description": "Short internal label distinguishing this candidate."
+              },
+              "angle": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "description": "The candidate's distinct editorial angle."
+              },
+              "translation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8000,
+                "description": "Faithful Simplified Chinese translation of only the publishable English copy."
+              },
+              "sourceIds": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                  "description": "Stable identifier local to this content document. Use letters, digits, underscores, or hyphens."
+                },
+                "description": "Unique sourceId values from the top-level sources array. Every referenced ID must exist."
+              },
+              "imageIds": {
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                  "description": "Stable identifier local to this content document. Use letters, digits, underscores, or hyphens."
+                },
+                "description": "Unique imageId values from the top-level images array. Use an empty array when no image adds value."
+              },
+              "kind": {
+                "type": "string",
+                "const": "post",
+                "description": "Standalone X post."
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 280,
+                "description": "Final publishable English X text. Must not exceed 280 characters."
+              }
+            },
+            "required": [
+              "candidateId",
+              "label",
+              "angle",
+              "translation",
+              "sourceIds",
+              "imageIds",
+              "kind",
+              "text"
+            ],
+            "additionalProperties": false,
+            "description": "A standalone publishable X post candidate."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "candidateId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                "description": "Unique candidate identifier within this content document."
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "description": "Short internal label distinguishing this candidate."
+              },
+              "angle": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "description": "The candidate's distinct editorial angle."
+              },
+              "translation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8000,
+                "description": "Faithful Simplified Chinese translation of only the publishable English copy."
+              },
+              "sourceIds": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                  "description": "Stable identifier local to this content document. Use letters, digits, underscores, or hyphens."
+                },
+                "description": "Unique sourceId values from the top-level sources array. Every referenced ID must exist."
+              },
+              "imageIds": {
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                  "description": "Stable identifier local to this content document. Use letters, digits, underscores, or hyphens."
+                },
+                "description": "Unique imageId values from the top-level images array. Use an empty array when no image adds value."
+              },
+              "kind": {
+                "type": "string",
+                "const": "reply",
+                "description": "Direct reply to an existing X post."
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 280,
+                "description": "Final publishable English X text. Must not exceed 280 characters."
+              },
+              "target": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Canonical HTTPS URL of the target X post."
+                  },
+                  "author": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "Target post author or handle."
+                  },
+                  "publishedAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                    "description": "Verified publication time of the target post."
+                  }
+                },
+                "required": [
+                  "url",
+                  "author",
+                  "publishedAt"
+                ],
+                "additionalProperties": false,
+                "description": "Required target metadata for reply and quote candidates."
+              }
+            },
+            "required": [
+              "candidateId",
+              "label",
+              "angle",
+              "translation",
+              "sourceIds",
+              "imageIds",
+              "kind",
+              "text",
+              "target"
+            ],
+            "additionalProperties": false,
+            "description": "A publishable direct reply that adds factual or analytical value."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "candidateId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                "description": "Unique candidate identifier within this content document."
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "description": "Short internal label distinguishing this candidate."
+              },
+              "angle": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "description": "The candidate's distinct editorial angle."
+              },
+              "translation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8000,
+                "description": "Faithful Simplified Chinese translation of only the publishable English copy."
+              },
+              "sourceIds": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                  "description": "Stable identifier local to this content document. Use letters, digits, underscores, or hyphens."
+                },
+                "description": "Unique sourceId values from the top-level sources array. Every referenced ID must exist."
+              },
+              "imageIds": {
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                  "description": "Stable identifier local to this content document. Use letters, digits, underscores, or hyphens."
+                },
+                "description": "Unique imageId values from the top-level images array. Use an empty array when no image adds value."
+              },
+              "kind": {
+                "type": "string",
+                "const": "quote",
+                "description": "Quote post referencing an existing X post."
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 280,
+                "description": "Final publishable English X text. Must not exceed 280 characters."
+              },
+              "target": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Canonical HTTPS URL of the target X post."
+                  },
+                  "author": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "Target post author or handle."
+                  },
+                  "publishedAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                    "description": "Verified publication time of the target post."
+                  }
+                },
+                "required": [
+                  "url",
+                  "author",
+                  "publishedAt"
+                ],
+                "additionalProperties": false,
+                "description": "Required target metadata for reply and quote candidates."
+              }
+            },
+            "required": [
+              "candidateId",
+              "label",
+              "angle",
+              "translation",
+              "sourceIds",
+              "imageIds",
+              "kind",
+              "text",
+              "target"
+            ],
+            "additionalProperties": false,
+            "description": "A publishable quote post with a distinct value-adding perspective."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "candidateId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                "description": "Unique candidate identifier within this content document."
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "description": "Short internal label distinguishing this candidate."
+              },
+              "angle": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "description": "The candidate's distinct editorial angle."
+              },
+              "translation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8000,
+                "description": "Faithful Simplified Chinese translation of only the publishable English copy."
+              },
+              "sourceIds": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                  "description": "Stable identifier local to this content document. Use letters, digits, underscores, or hyphens."
+                },
+                "description": "Unique sourceId values from the top-level sources array. Every referenced ID must exist."
+              },
+              "imageIds": {
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                  "description": "Stable identifier local to this content document. Use letters, digits, underscores, or hyphens."
+                },
+                "description": "Unique imageId values from the top-level images array. Use an empty array when no image adds value."
+              },
+              "kind": {
+                "type": "string",
+                "const": "thread",
+                "description": "Ordered X thread."
+              },
+              "posts": {
+                "minItems": 2,
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 280,
+                  "description": "Final publishable English X text. Must not exceed 280 characters."
+                },
+                "description": "Two to twenty publishable posts in final thread order."
+              }
+            },
+            "required": [
+              "candidateId",
+              "label",
+              "angle",
+              "translation",
+              "sourceIds",
+              "imageIds",
+              "kind",
+              "posts"
+            ],
+            "additionalProperties": false,
+            "description": "A multi-post X thread used only when the idea cannot be expressed clearly in one post."
+          }
+        ],
+        "description": "One complete X candidate: post, reply, quote, or thread."
+      },
+      "description": "One to three materially different, fully formed X candidates. candidateId values must be unique."
+    },
+    "recommendation": {
+      "description": "Required when multiple candidates are present and omitted when only one candidate exists.",
+      "type": "object",
+      "properties": {
+        "candidateId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "description": "Candidate recommended as the default option."
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Why this candidate is the strongest default option."
+        }
+      },
+      "required": [
+        "candidateId",
+        "reason"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "contentId",
+    "generatedAt",
+    "displayTitle",
+    "account",
+    "operator",
+    "event",
+    "sources",
+    "images",
+    "candidates"
+  ],
+  "additionalProperties": false,
+  "title": "Pulse X Content v1",
+  "description": "Complete immutable X content produced by Pulse X and delivered by Pulse Relay. All candidate sourceIds and imageIds must resolve to top-level entries."
+}
