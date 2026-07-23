@@ -1,12 +1,8 @@
 {
   "schemaVersion": "x-content/v1",
-  "contentId": "x-primary-20260723-valid-quote",
+  "contentId": "x-20260723-valid-quote",
   "generatedAt": "2026-07-23T09:20:00+08:00",
   "displayTitle": "Infrastructure pricing change",
-  "account": {
-    "platform": "x",
-    "accountId": "primary"
-  },
   "operator": {
     "name": "pulse-x",
     "repository": "sharebravery/pulse-x",
