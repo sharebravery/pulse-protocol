@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "x-review-payload/v1",
+  "reviewId": "x-primary-20260723-missing-recommendation",
+  "generatedAt": "2026-07-23T09:00:00+08:00",
+  "timezone": "Asia/Hong_Kong",
+  "account": {
+    "platform": "x",
+    "accountId": "primary"
+  },
+  "operator": {
+    "name": "pulse-x",
+    "repo": "sharebravery/pulse-x",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "event": {
+    "eventTitle": "Example product launch",
+    "publishJudgment": "The release materially changes a common developer workflow.",
+    "repeatReason": "首次覆盖",
+    "primaryDomain": "AI, software and tools"
+  },
+  "sources": [
+    {
+      "sourceId": "official",
+      "title": "Official announcement",
+      "url": "https://example.com/announcement"
+    }
+  ],
+  "images": [],
+  "candidates": [
+    {
+      "candidateId": "c1",
+      "kind": "post",
+      "label": "Direct take",
+      "angle": "developer impact",
+      "reason": "Clear user-facing consequence.",
+      "language": "en",
+      "sourceIds": ["official"],
+      "imageIds": [],
+      "text": "A concise example post grounded in the official announcement."
+    }
+  ],
+  "recommendation": {
+    "candidateId": "missing",
+    "reason": "This candidate does not exist."
+  }
+}
