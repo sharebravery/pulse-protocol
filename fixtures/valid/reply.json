@@ -1,22 +1,21 @@
 {
-  "schemaVersion": "x-review-payload/v1",
-  "reviewId": "x-primary-20260723-valid-reply",
+  "schemaVersion": "x-content/v1",
+  "contentId": "x-primary-20260723-valid-reply",
   "generatedAt": "2026-07-23T09:10:00+08:00",
-  "timezone": "Asia/Hong_Kong",
+  "displayTitle": "Developer tooling update",
   "account": {
     "platform": "x",
     "accountId": "primary"
   },
   "operator": {
     "name": "pulse-x",
-    "repo": "sharebravery/pulse-x",
-    "commit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    "repository": "sharebravery/pulse-x",
+    "commitSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
   },
   "event": {
-    "eventTitle": "Developer tooling update",
-    "publishJudgment": "The update changes a common development workflow and supports a useful direct response.",
-    "repeatReason": "首次覆盖",
-    "primaryDomain": "AI, software and tools"
+    "title": "Developer tooling update",
+    "whyItMatters": "The update changes a common development workflow and supports a useful direct response.",
+    "domains": ["AI and software"]
   },
   "sources": [
     {
@@ -33,9 +32,8 @@
       "candidateId": "reply-1",
       "kind": "reply",
       "label": "Practical clarification",
-      "angle": "workflow boundary",
-      "reason": "Adds a concrete limitation that is missing from the original post.",
-      "language": "en",
+      "angle": "Workflow boundary",
+      "translation": "有价值的是工作流变化，但边界同样重要：团队在发布前仍需验证生成的改动。",
       "sourceIds": ["official-post"],
       "imageIds": [],
       "text": "The useful part is the workflow change, but the boundary matters: teams still need to verify generated changes before shipping them.",
