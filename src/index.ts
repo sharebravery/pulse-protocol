@@ -4,10 +4,10 @@ export {
   OperatorRefSchema,
   SourceRefSchema,
   XCandidateSchema,
-  XReviewPayloadSchema,
-  createXReviewPayloadJsonSchema,
-  parseXReviewPayload,
-} from "./x-review-payload.js";
+  XContentSchema,
+  createXContentJsonSchema,
+  parseXContent,
+} from "./x-content.js";
 
 export type {
   AccountRef,
@@ -15,5 +15,5 @@ export type {
   OperatorRef,
   SourceRef,
   XCandidate,
-  XReviewPayload,
-} from "./x-review-payload.js";
+  XContent,
+} from "./x-content.js";
