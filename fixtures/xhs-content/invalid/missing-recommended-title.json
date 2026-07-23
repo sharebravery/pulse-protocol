@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "xhs-content/v1",
+  "contentId": "xhs-primary-20260723-invalid",
+  "generatedAt": "2026-07-23T18:00:00+08:00",
+  "displayTitle": "Invalid XHS content",
+  "account": {
+    "platform": "xhs",
+    "accountId": "primary"
+  },
+  "operator": {
+    "name": "pulse-xhs",
+    "repository": "sharebravery/pulse-xhs",
+    "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "event": {
+    "title": "Example event",
+    "whyItMatters": "This fixture verifies title references.",
+    "domains": ["Technology"]
+  },
+  "sources": [
+    {
+      "sourceId": "official",
+      "title": "Official source",
+      "url": "https://example.com/source",
+      "kind": "official"
+    }
+  ],
+  "images": [],
+  "titles": [
+    {
+      "titleId": "existing-title",
+      "text": "一个有效标题"
+    }
+  ],
+  "recommendedTitleId": "missing-title",
+  "body": "这是一份无效内容，因为推荐标题不存在。",
+  "tags": [],
+  "sourceIds": ["official"],
+  "imageIds": []
+}
