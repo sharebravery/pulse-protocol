@@ -1,23 +1,47 @@
 {
   "name": "@sharebravery/pulse-protocol",
   "version": "0.1.0",
-  "private": true,
+  "description": "Versioned Zod and JSON Schema contracts for the Pulse system.",
+  "private": false,
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./schemas/x-review-payload/v1": "./schemas/x-review-payload/v1.schema.json"
+  },
+  "files": [
+    "dist",
+    "schemas"
+  ],
+  "sideEffects": false,
   "packageManager": "pnpm@10.6.3",
   "engines": {
     "node": ">=24 <25"
   },
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "pnpm build",
     "generate": "tsx scripts/generate-schema.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "check": "pnpm typecheck && pnpm test && pnpm generate && git diff --exit-code -- schemas"
+    "check": "pnpm typecheck && pnpm test && pnpm generate && git diff --exit-code -- schemas && pnpm build"
+  },
+  "dependencies": {
+    "zod": "4.4.3"
   },
   "devDependencies": {
     "@types/node": "24.0.0",
     "tsx": "4.19.3",
     "typescript": "5.8.3",
-    "vitest": "3.2.4",
-    "zod": "4.4.3"
-  }
+    "vitest": "3.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sharebravery/pulse-protocol.git"
+  },
+  "license": "MIT"
 }
