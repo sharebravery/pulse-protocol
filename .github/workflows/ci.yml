@@ -24,9 +24,14 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm generate
+      - name: Upload generated schema
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-x-review-schema
+          path: schemas/x-review-payload/v1.schema.json
       - run: pnpm typecheck
       - run: pnpm test
-      - run: pnpm generate
       - name: Verify generated contracts are current
         run: git diff --exit-code -- schemas
       - run: pnpm build
