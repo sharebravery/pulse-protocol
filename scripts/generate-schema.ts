@@ -24,6 +24,6 @@ const schemas = [
 for (const schema of schemas) {
   const outputPath = resolve(process.cwd(), schema.path);
   await mkdir(dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, `${JSON.stringify(schema.value, null, 2)}\n`, "utf8");
+  await writeFile(outputPath, JSON.stringify(schema.value), "utf8");
   console.log(`Generated ${outputPath}`);
 }
