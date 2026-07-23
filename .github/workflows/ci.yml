@@ -6,7 +6,7 @@ on:
   pull_request:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   validate:
@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
       - uses: pnpm/action-setup@v4
         with:
           version: 10.6.3
@@ -25,11 +26,15 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm generate
-      - name: Upload generated schema
-        uses: actions/upload-artifact@v4
-        with:
-          name: generated-x-review-schema
-          path: schemas/x-review-payload/v1.schema.json
+      - name: Commit generated schema on the PR branch
+        run: |
+          if ! git diff --quiet -- schemas; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add schemas/x-review-payload/v1.schema.json
+            git commit -m "update generated X review schema"
+            git push origin HEAD:${{ github.event.pull_request.head.ref }}
+          fi
       - run: pnpm typecheck
       - run: pnpm test
       - name: Verify generated contracts are current
