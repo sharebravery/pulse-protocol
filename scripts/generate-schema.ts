@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import {
   createContentPackageJsonSchema,
-  createPublicationResultJsonSchema,
+  createDeliveryReceiptJsonSchema,
 } from "../src/index.js";
 
 const schemas = [
@@ -11,8 +11,8 @@ const schemas = [
     value: createContentPackageJsonSchema(),
   },
   {
-    path: "schemas/publication-result/v1.schema.json",
-    value: createPublicationResultJsonSchema(),
+    path: "schemas/delivery-receipt/v1.schema.json",
+    value: createDeliveryReceiptJsonSchema(),
   },
 ];
 
