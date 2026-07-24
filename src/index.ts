@@ -1,34 +1,28 @@
 export {
+  AgentRefSchema,
+  ContentPackageSchema,
   ImageRefSchema,
-  OperatorRefSchema,
+  SignalRefSchema,
   SourceRefSchema,
   XCandidateSchema,
-  XContentSchema,
-  createXContentJsonSchema,
-  parseXContent,
-} from "./x-content.js";
+  XPayloadSchema,
+  XhsPayloadSchema,
+  XhsTitleSchema,
+  createContentPackageJsonSchema,
+  parseContentPackage,
+} from "./content-package.js";
 
 export type {
+  AgentRef,
+  ContentPackage,
   ImageRef,
-  OperatorRef,
+  SignalRef,
   SourceRef,
   XCandidate,
-  XContent,
-} from "./x-content.js";
-
-export {
-  XhsContentSchema,
-  XhsOperatorRefSchema,
-  XhsTitleSchema,
-  createXhsContentJsonSchema,
-  parseXhsContent,
-} from "./xhs-content.js";
-
-export type {
-  XhsContent,
-  XhsOperatorRef,
+  XPayload,
+  XhsPayload,
   XhsTitle,
-} from "./xhs-content.js";
+} from "./content-package.js";
 
 export {
   PublicationResultSchema,
