@@ -1,19 +1,14 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import {
+  createContentPackageJsonSchema,
   createPublicationResultJsonSchema,
-  createXContentJsonSchema,
-  createXhsContentJsonSchema,
 } from "../src/index.js";
 
 const schemas = [
   {
-    path: "schemas/x-content/v1.schema.json",
-    value: createXContentJsonSchema(),
-  },
-  {
-    path: "schemas/xhs-content/v1.schema.json",
-    value: createXhsContentJsonSchema(),
+    path: "schemas/content-package/v1.schema.json",
+    value: createContentPackageJsonSchema(),
   },
   {
     path: "schemas/publication-result/v1.schema.json",
