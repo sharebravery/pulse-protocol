@@ -25,9 +25,9 @@ export type {
 } from "./content-package.js";
 
 export {
-  PublicationResultSchema,
-  createPublicationResultJsonSchema,
-  parsePublicationResult,
-} from "./publication-result.js";
+  DeliveryReceiptSchema,
+  createDeliveryReceiptJsonSchema,
+  parseDeliveryReceipt,
+} from "./delivery-receipt.js";
 
-export type { PublicationResult } from "./publication-result.js";
+export type { DeliveryReceipt } from "./delivery-receipt.js";
