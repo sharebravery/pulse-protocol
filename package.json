@@ -1,7 +1,7 @@
 {
   "name": "@sharebravery/pulse-protocol",
   "version": "1.0.0",
-  "description": "Agent-native Zod and JSON Schema contracts for the Pulse system.",
+  "description": "Agent-native contracts for Pulse content delivery.",
   "private": false,
   "type": "module",
   "main": "./dist/index.js",
@@ -12,17 +12,12 @@
       "import": "./dist/index.js"
     },
     "./schemas/content-package/v1": "./schemas/content-package/v1.schema.json",
-    "./schemas/publication-result/v1": "./schemas/publication-result/v1.schema.json"
+    "./schemas/delivery-receipt/v1": "./schemas/delivery-receipt/v1.schema.json"
   },
-  "files": [
-    "dist",
-    "schemas"
-  ],
+  "files": ["dist", "schemas"],
   "sideEffects": false,
   "packageManager": "pnpm@10.6.3",
-  "engines": {
-    "node": ">=24 <25"
-  },
+  "engines": { "node": ">=24 <25" },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "prepare": "pnpm build",
@@ -31,9 +26,7 @@
     "test": "vitest run",
     "check": "pnpm typecheck && pnpm test && pnpm generate && git diff --exit-code -- schemas && pnpm build"
   },
-  "dependencies": {
-    "zod": "4.4.3"
-  },
+  "dependencies": { "zod": "4.4.3" },
   "devDependencies": {
     "@types/node": "24.0.0",
     "tsx": "4.19.3",
